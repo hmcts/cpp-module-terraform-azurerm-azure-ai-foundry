@@ -237,3 +237,58 @@ variable "ai_service_private_endpoints" {
     private_dns_resource_group_name = string
   }))
 }
+
+variable "ai_services_name" {
+  description = "Name of the AI Services resource."
+  type        = string
+}
+
+variable "ai_services_sku" {
+  description = "SKU name for the AI Services resource (e.g., S0, S1)."
+  type        = string
+}
+
+
+variable "ai_services_local_authentication_enabled" {
+  description = "Enable or disable local authentication."
+  type        = bool
+  default = true
+}
+
+variable "network_acls" {
+  description = "Network access control settings for the AI Service."
+
+  type = object({
+    bypass                     = optional(string, "AzureServices")      # or "None"
+    default_action             = optional(string, "Deny")               # Must be "Allow" or "Deny"
+    ip_rules                   = optional(list(string), [])             # List of IPs or CIDRs
+    virtual_network_subnet_ids = optional(list(string), [])             # List of subnet IDs
+  })
+
+  default = {
+    bypass                     = "AzureServices"
+    default_action             = "Deny"
+    ip_rules                   = []
+    virtual_network_subnet_ids = []
+  }
+}
+
+variable "outbound_network_access_restricted" {
+  description = "Restrict outbound network access from the AI service."
+  type        = bool
+  default = false
+}
+
+variable "ai_services_public_network_access" {
+  description = "Public network access setting (Enabled or Disabled)."
+  type        = string
+}
+
+variable "ai_services_private_endpoints" {
+  description = "List of private endpoints (internal + external)"
+  type = list(object({
+    private_dns_zone_ids            = list(string)
+    subnet_id                       = string
+    private_dns_resource_group_name = string
+  }))
+}

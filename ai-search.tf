@@ -36,7 +36,7 @@ resource "azurerm_private_endpoint" "ai_search_pe" {
   subnet_id           = each.value.subnet_id
 
   private_service_connection {
-    name                           = "${var.ai_search_service_name}-ai-search-service-${each.key}"
+    name                           = "${var.ai_search_service_name}-search-service-${each.key}"
     private_connection_resource_id = azurerm_search_service.main.id
     subresource_names              = ["searchService"]
     is_manual_connection           = false

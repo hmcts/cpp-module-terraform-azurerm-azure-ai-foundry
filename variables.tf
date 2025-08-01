@@ -292,3 +292,16 @@ variable "ai_services_private_endpoints" {
     private_dns_resource_group_name = string
   }))
 }
+
+variable "model_deployments" {
+  type = map(object({
+    model_name   = string
+    version      = string
+    format       = string
+    sku_name     = string
+    capacity     = number
+    dynamic_throttling_enabled = optional(string)
+    version_upgrade_option = optional(string)
+    rai_policy_name = optional(string)
+  }))
+}

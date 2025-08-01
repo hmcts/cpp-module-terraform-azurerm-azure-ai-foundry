@@ -1,0 +1,54 @@
+resource "azurerm_search_service" "main" {
+  name                = var.ai_search_service_name
+  resource_group_name = var.resource_group_name
+  location            = var.location
+  sku                 = var.ai_search_sku #basic and free in shared cluster, standard requires a dedicated cluster wat is that ?
+
+  replica_count                 = var.replica_count
+  partition_count               = var.partition_count
+  hosting_mode                  = var.hosting_mode
+  public_network_access_enabled = var.public_network_access_enabled
+  allowed_ips                   = var.public_network_access_enabled ? var.allowed_ips : null
+
+  dynamic "identity" {
+    for_each = var.identity == {} ? [] : [var.identity]
+    content {
+      type         = lookup(identity.value, "type", null)
+      identity_ids = lookup(identity.value, "identity_ids", null)
+    }
+  }
+
+  semantic_search_sku = var.ai_search_sku != "free" ? var.semantic_search_sku : null
+
+  local_authentication_enabled = var.local_authentication_enabled
+  authentication_failure_mode  = var.local_authentication_enabled ? var.authentication_failure_mode : null
+  tags                         = var.tags
+}
+
+
+
+resource "azurerm_private_endpoint" "ai_search_pe" {
+  for_each = { for idx, pe in var.ai_service_private_endpoints : idx => pe }
+
+  name                = "${var.ai_search_service_name}-pe-${each.key}"
+  location            = var.location
+  resource_group_name = var.resource_group_name
+  subnet_id           = each.value.subnet_id
+
+  private_service_connection {
+    name                           = "${var.ai_search_service_name}-ai-search-service-${each.key}"
+    private_connection_resource_id = azurerm_search_service.main.id
+    subresource_names              = ["searchService"]
+    is_manual_connection           = false
+  }
+
+  private_dns_zone_group {
+    name                 = "private-dns-zone-group-${each.key}"
+    private_dns_zone_ids = each.value.private_dns_zone_ids
+  }
+}
+
+
+#skillsets
+#index and indexers
+#datasource

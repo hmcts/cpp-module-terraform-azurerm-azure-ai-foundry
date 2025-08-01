@@ -45,3 +45,195 @@ variable "type" {
   description = "Name of service type"
   default     = ""
 }
+
+variable "resource_group_name" {
+  description = "The name of the resource group in which to create the storage account. Changing this forces a new resource to be created."
+  type        = string
+}
+
+variable "ai_hub" {
+  description = "The name of ai hub"
+  type        = string
+}
+
+variable "public_network_access" {
+  description = "Whether the public network access is enabled"
+  type        = string
+}
+
+variable "storage_account_id" {
+  type = string
+}
+
+variable "key_vault_id" {
+  type = string
+}
+
+variable "application_insights_id" {
+  type = string
+}
+
+
+variable "sku_name" {
+  default = "Basic"
+}
+
+variable "enable_system_assigned_identity" {
+  type    = bool
+  default = true
+}
+
+variable "enable_user_assigned_identity" {
+  type    = bool
+  default = false
+}
+
+variable "user_assigned_identity_id" {
+  type    = string
+  default = null
+}
+
+variable "enable_encryption" {
+  type    = bool
+  default = false
+}
+
+variable "encryption_key_vault_id" {
+  type    = string
+  default = null
+}
+
+variable "encryption_key_id" {
+  type    = string
+  default = null
+}
+
+# Managed Network
+variable "enable_managed_network" {
+  type    = bool
+  default = false
+}
+
+variable "managed_network_isolation_mode" {
+  type    = string
+  default = "Disabled"
+}
+
+variable "tags" {
+  description = "A mapping of tags to assign to the resource."
+  type        = map(string)
+  default     = {}
+}
+
+variable "project_description" {
+  type    = string
+  default = "AI hub project"
+}
+variable "project_friendly_name" {
+  type    = string
+  default = "AI Hub Project"
+}
+variable "project_name" {}
+
+variable "enable_data_lookup" {
+  description = "Enable lookup of private DNS zones"
+  type        = bool
+  default     = true
+}
+
+variable "private_dns_resource_group_name" {
+  description = "Resource group where the private DNS zones are located"
+  type        = string
+  default     = "RG-DEV-SVC-01"
+}
+variable "subnet_ai" {
+  description = "Subnet ID for the private endpoint"
+  type        = string
+}
+
+variable "identity" {
+  description = "Identity block Specifies the identity to assign to function app"
+  type        = any
+  default     = {}
+}
+
+variable "ai_search_service_name" {
+  type        = string
+  description = "Name of the Azure Cognitive Search service"
+}
+
+variable "ai_search_sku" {
+  type        = string
+  description = "SKU for Azure Cognitive Search. Possible values: 'free', 'basic', 'standard', etc."
+  validation {
+    condition     = contains(["free", "basic", "standard", "standard2", "standard3", "storage_optimized_l1", "storage_optimized_l2"], var.ai_search_sku)
+    error_message = "Invalid SKU for Azure Cognitive Search."
+  }
+}
+
+variable "replica_count" {
+  type        = number
+  default     = 1
+  description = "Number of replicas (ignored for 'free' SKU)"
+}
+
+variable "partition_count" {
+  type        = number
+  default     = 1
+  description = "Number of partitions (ignored for 'free' SKU)"
+}
+
+variable "hosting_mode" {
+  type        = string
+  default     = "default"
+  description = "Hosting mode for the search service"
+}
+
+variable "public_network_access_enabled" {
+  type        = bool
+  description = "Enable or disable public network access"
+}
+
+variable "allowed_ips" {
+  type        = list(string)
+  default     = []
+  description = "List of allowed IP addresses (only used if public network access is enabled)"
+}
+
+
+
+variable "semantic_search_sku" {
+  type        = string
+  default     = null
+  description = "SKU for semantic search (only applicable if SKU is not 'free')"
+}
+
+variable "local_authentication_enabled" {
+  type        = bool
+  default     = false
+  description = "Whether local (API key) authentication is enabled"
+}
+
+variable "authentication_failure_mode" {
+  type        = string
+  default     = "Http401WithBearerChallenge"
+  description = "Specifies the authentication failure behavior (e.g., Http401WithBearerChallenge)"
+}
+
+variable "private_endpoints" {
+  description = "List of private endpoints (internal + external)"
+  type = list(object({
+    private_dns_zone_ids            = list(string)
+    subnet_id                       = string
+    private_dns_resource_group_name = string
+  }))
+}
+
+variable "ai_service_private_endpoints" {
+  description = "List of private endpoints (internal + external)"
+  type = list(object({
+    private_dns_zone_ids            = list(string)
+    subnet_id                       = string
+    private_dns_resource_group_name = string
+  }))
+}

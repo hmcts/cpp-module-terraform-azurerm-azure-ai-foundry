@@ -72,4 +72,3 @@ resource "azapi_resource" "AIServicesConnection" {
   response_export_values = ["*"]
 }
 
-}

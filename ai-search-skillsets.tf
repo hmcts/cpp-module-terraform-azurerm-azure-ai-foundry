@@ -137,7 +137,7 @@ locals {
 
 resource "restapi_object" "ai_search_skillsets" {
   path         = "/skillsets"
-  query_string = "api-version=2023-10-01-Preview"
+  query_string = "api-version=2024-07-01"
   data         = jsonencode(local.skillsets_json)
   id_attribute = "name" # The ID field on the response
   depends_on = [

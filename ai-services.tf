@@ -54,7 +54,7 @@ resource "azurerm_private_endpoint" "ai_service_pe" {
 
 resource "azapi_resource" "AIServicesConnection" {
   type      = "Microsoft.MachineLearningServices/workspaces/connections@2024-04-01-preview"
-  name      = "${var.ai_services_name}-${var.env}-connection"
+  name      = "${var.ai_services_name}-${var.environment}-connection"
   parent_id = azurerm_ai_foundry.ai_hub.id
 
   body = {

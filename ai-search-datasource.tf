@@ -1,4 +1,4 @@
-
+#see how to add rbac authentication instead of api key -- search service contributor role
 provider "restapi" {
   uri                  = "https://${azurerm_search_service.main.name}.search.windows.net"
   write_returns_object = true

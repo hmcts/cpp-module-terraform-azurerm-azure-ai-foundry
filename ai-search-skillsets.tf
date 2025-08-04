@@ -4,6 +4,7 @@ locals {
     "description" : "IDPC skillset configuration",
     "skills" : [
       {
+        "@odata.type": "#Microsoft.Skills.Text.SplitSkill",
         "name" : "#1",
         "description" : "Split skill to chunk documents",
         "context" : "/document",
@@ -28,6 +29,7 @@ locals {
         ]
       },
       {
+        "@odata.type": "#Microsoft.Skills.Text.AzureOpenAIEmbeddingSkill",
         "name" : "#2",
         "context" : "/document/pages/*",
         "resourceUri" : "https://${var.ai_services_name}.openai.azure.com",
@@ -49,6 +51,7 @@ locals {
         ]
       },
       {
+        "@odata.type": "#Microsoft.Skills.Util.DocumentExtractionSkill",
         "name" : "#3",
         "context" : "/document",
         "parsingMode" : "default",

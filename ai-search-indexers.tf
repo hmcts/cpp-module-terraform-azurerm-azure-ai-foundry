@@ -1,9 +1,9 @@
 locals {
   indexers_json = {
     "name" : "idpcIndexer",
-    "dataSourceName" : "local.datasource_json.name",
-    "targetIndexName" : "local.indexes_json.name",
-    "skillsetName" : "local.skillsets_json.name",
+    "dataSourceName" : local.datasource_json.name,
+    "targetIndexName" : local.indexes_json.name,
+    "skillsetName" : local.skillsets_json.name,
     "parameters" : {
       "batchSize" : null,
       "maxFailedItems" : null,

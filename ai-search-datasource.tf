@@ -28,7 +28,7 @@ resource "restapi_object" "storage_account_datasource" {
   path         = "/datasources"
   query_string = "api-version=2023-10-01-Preview"
   data         = jsonencode(local.datasource_json)
-  id_attribute = "id" # The ID field on the response
+  id_attribute = "name" # The ID field on the response
   depends_on = [
     azurerm_search_service.main
   ]

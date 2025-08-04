@@ -52,22 +52,24 @@ resource "azurerm_private_endpoint" "ai_service_pe" {
   }
 }
 
-# resource "azapi_resource" "AIServicesConnection" {
-#   type      = "Microsoft.MachineLearningServices/workspaces/connections@2024-04-01-preview"
-#   name      = "platops-slack-help-bot-${var.env}"
-#   parent_id = azurerm_machine_learning_workspace.hub.id
-#
-#   body = {
-#     properties = {
-#       category      = "AIServices",
-#       target        = azurerm_ai_services.AIServices.endpoint,
-#       authType      = "AAD",
-#       isSharedToAll = true,
-#       metadata = {
-#         ApiType    = "Azure",
-#         ResourceId = azurerm_ai_services.AIServices.id
-#       }
-#     }
-#   }
-#   response_export_values = ["*"]
-# }
+resource "azapi_resource" "AIServicesConnection" {
+  type      = "Microsoft.MachineLearningServices/workspaces/connections@2024-04-01-preview"
+  name      = "${var.ai_services_name}-${var.env}-connection"
+  parent_id = azurerm_ai_foundry.ai_hub.id
+
+  body = {
+    properties = {
+      category      = "AIServices",
+      target        = azurerm_ai_services.AIServices.endpoint,
+      authType      = "AAD",
+      isSharedToAll = true,
+      metadata = {
+        ApiType    = "Azure",
+        ResourceId = azurerm_ai_services.AIServices.id
+      }
+    }
+  }
+  response_export_values = ["*"]
+}
+
+}

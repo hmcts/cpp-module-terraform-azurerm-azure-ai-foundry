@@ -1,6 +1,6 @@
 locals {
   indexers_json = {
-    "name" : "idpcIndexer",
+    "name" : "idpcindexer",
     "dataSourceName" : local.datasource_json.name,
     "targetIndexName" : local.indexes_json.name,
     "skillsetName" : local.skillsets_json.name,

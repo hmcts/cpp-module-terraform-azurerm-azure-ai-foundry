@@ -1,17 +1,17 @@
 resource "azurerm_ai_services" "AIServices" {
-  name                = var.ai_services_name
-  location            = var.location
-  resource_group_name = var.resource_group_name
-  sku_name = var.ai_services_sku
-  custom_subdomain_name = "${var.ai_services_name}-${var.environment}"
-  local_authentication_enabled = var.ai_services_local_authentication_enabled
+  name                               = var.ai_services_name
+  location                           = var.location
+  resource_group_name                = var.resource_group_name
+  sku_name                           = var.ai_services_sku
+  custom_subdomain_name              = "${var.ai_services_name}-${var.environment}"
+  local_authentication_enabled       = var.ai_services_local_authentication_enabled
   outbound_network_access_restricted = var.outbound_network_access_restricted
-  public_network_access = var.ai_services_public_network_access
+  public_network_access              = var.ai_services_public_network_access
 
   network_acls {
-    bypass          = var.network_acls.bypass
-    default_action  = var.network_acls.default_action
-    ip_rules        = var.network_acls.ip_rules
+    bypass         = var.network_acls.bypass
+    default_action = var.network_acls.default_action
+    ip_rules       = var.network_acls.ip_rules
 
     dynamic "virtual_network_rules" {
       for_each = var.network_acls.virtual_network_subnet_ids == null ? [] : var.network_acls.virtual_network_subnet_ids
@@ -22,13 +22,13 @@ resource "azurerm_ai_services" "AIServices" {
   }
 
   dynamic "identity" {
-      for_each = var.identity == {} ? [] : [var.identity]
-      content {
-        type         = lookup(identity.value, "type", null)
-        identity_ids = lookup(identity.value, "identity_ids", null)
-      }
+    for_each = var.identity == {} ? [] : [var.identity]
+    content {
+      type         = lookup(identity.value, "type", null)
+      identity_ids = lookup(identity.value, "identity_ids", null)
     }
-  tags                         = var.tags
+  }
+  tags = var.tags
 }
 
 resource "azurerm_private_endpoint" "ai_service_pe" {
@@ -71,4 +71,3 @@ resource "azapi_resource" "AIServicesConnection" {
   }
   response_export_values = ["*"]
 }
-

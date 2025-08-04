@@ -14,7 +14,7 @@ resource "azurerm_cognitive_deployment" "models" {
     capacity = each.value.capacity
   }
 
-  rai_policy_name              = each.value.rai_policy_name
-  version_upgrade_option       = each.value.version_upgrade_option
-  dynamic_throttling_enabled   = each.value.dynamic_throttling_enabled
+  rai_policy_name            = each.value.rai_policy_name
+  version_upgrade_option     = each.value.version_upgrade_option
+  dynamic_throttling_enabled = each.value.dynamic_throttling_enabled
 }

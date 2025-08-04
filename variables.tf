@@ -252,17 +252,17 @@ variable "ai_services_sku" {
 variable "ai_services_local_authentication_enabled" {
   description = "Enable or disable local authentication."
   type        = bool
-  default = true
+  default     = true
 }
 
 variable "network_acls" {
   description = "Network access control settings for the AI Service."
 
   type = object({
-    bypass                     = optional(string, "AzureServices")      # or "None"
-    default_action             = optional(string, "Deny")               # Must be "Allow" or "Deny"
-    ip_rules                   = optional(list(string), [])             # List of IPs or CIDRs
-    virtual_network_subnet_ids = optional(list(string), [])             # List of subnet IDs
+    bypass                     = optional(string, "AzureServices") # or "None"
+    default_action             = optional(string, "Deny")          # Must be "Allow" or "Deny"
+    ip_rules                   = optional(list(string), [])        # List of IPs or CIDRs
+    virtual_network_subnet_ids = optional(list(string), [])        # List of subnet IDs
   })
 
   default = {
@@ -276,7 +276,7 @@ variable "network_acls" {
 variable "outbound_network_access_restricted" {
   description = "Restrict outbound network access from the AI service."
   type        = bool
-  default = false
+  default     = false
 }
 
 variable "ai_services_public_network_access" {
@@ -295,13 +295,18 @@ variable "ai_services_private_endpoints" {
 
 variable "model_deployments" {
   type = map(object({
-    model_name   = string
-    version      = string
-    format       = string
-    sku_name     = string
-    capacity     = number
+    model_name                 = string
+    version                    = string
+    format                     = string
+    sku_name                   = string
+    capacity                   = number
     dynamic_throttling_enabled = optional(string)
-    version_upgrade_option = optional(string)
-    rai_policy_name = optional(string)
+    version_upgrade_option     = optional(string)
+    rai_policy_name            = optional(string)
   }))
+}
+
+variable "container_name" {
+  description = "container name for datasource"
+  type        = string
 }

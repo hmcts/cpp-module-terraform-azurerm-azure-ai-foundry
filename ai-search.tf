@@ -53,6 +53,7 @@ resource "azurerm_role_assignment" "search_storage_reader" {
   role_definition_name = "Storage Blob Data Reader"
   principal_id         = azurerm_search_service.main.identity[0].principal_id
 }
+
 #skillsets
 #index and indexers
 #datasource

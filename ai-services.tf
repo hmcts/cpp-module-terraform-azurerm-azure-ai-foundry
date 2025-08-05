@@ -71,3 +71,10 @@ resource "azapi_resource" "AIServicesConnection" {
   }
   response_export_values = ["*"]
 }
+
+resource "azurerm_role_assignment" "identity_access_to_ai_services" {
+  principal_id = azurerm_ai_services.AIServices.identity[0].principal_id
+  scope        = azurerm_ai_services.AIServices.id
+
+  role_definition_name = "Cognitive Services OpenAI User"
+}

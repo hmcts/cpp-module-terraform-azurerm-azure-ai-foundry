@@ -61,7 +61,7 @@ resource "azapi_resource" "AIServicesConnection" {
     properties = {
       category      = "AIServices",
       target        = azurerm_ai_services.AIServices.endpoint,
-      authType      = "APIKey",
+      authType      = "ApiKey",
       isSharedToAll = true,
       credentials = {
               key = azurerm_ai_services.AIServices.primary_access_key  # <<<<<< required when using APIKey auth

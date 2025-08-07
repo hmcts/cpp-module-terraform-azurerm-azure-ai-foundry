@@ -9,7 +9,7 @@ provider "restapi" {
   debug                = true
 
   headers = {
-    "api-key"      = data.azurerm_search_service.search,
+    "api-key"      = data.azurerm_search_service.search.primary_key,
     "Content-Type" = "application/json"
   }
 }

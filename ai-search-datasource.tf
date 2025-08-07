@@ -1,11 +1,15 @@
 #see how to add rbac authentication instead of api key -- search service contributor role
+data "azurerm_search_service" "search" {
+  name                = "ai-idpc-search-service"
+  resource_group_name = "RG-STE-AI-IDPC-01"
+}
 provider "restapi" {
   uri                  = "https://${azurerm_search_service.main.name}.search.windows.net"
   write_returns_object = true
   debug                = true
 
   headers = {
-    "api-key"      = azurerm_search_service.main.primary_key,
+    "api-key"      = data.azurerm_search_service.search,
     "Content-Type" = "application/json"
   }
 }

@@ -1,4 +1,4 @@
-see how to add rbac authentication instead of api key -- search service contributor role
+#see how to add rbac authentication instead of api key -- search service contributor role
 data "azurerm_search_service" "search" {
   name                = var.ai_search_service_name
   resource_group_name = var.resource_group_name

@@ -1,0 +1,11 @@
+{
+  "name": "${datasource_name}",
+  "description": " ${datasource_name} Data source configuration",
+  "type": "${datasource_type}",
+  "credentials": {
+    "connectionString": "ResourceId=${storage_account_id};"
+  },
+  "container": {
+    "name": "${container_name}"
+  }
+}

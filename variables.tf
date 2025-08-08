@@ -129,9 +129,7 @@ variable "project_description" {
   type    = string
   default = "AI hub project"
 }
-variable "project_friendly_name" {
-  type    = string
-}
+
 variable "project_name" {}
 
 variable "enable_data_lookup" {

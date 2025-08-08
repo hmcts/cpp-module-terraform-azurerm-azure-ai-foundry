@@ -50,6 +50,7 @@ resource "azurerm_private_endpoint" "ai_service_pe" {
     name                 = "private-dns-zone-group-${each.key}"
     private_dns_zone_ids = each.value.private_dns_zone_ids
   }
+  tags                         = var.tags
 }
 
 resource "azapi_resource" "AIServicesConnection" {
@@ -61,11 +62,8 @@ resource "azapi_resource" "AIServicesConnection" {
     properties = {
       category      = "AIServices",
       target        = azurerm_ai_services.AIServices.endpoint,
-      authType      = "ApiKey",
+      authType      = "AAD",
       isSharedToAll = true,
-      credentials = {
-              key = azurerm_ai_services.AIServices.primary_access_key  # <<<<<< required when using APIKey auth
-            },
       metadata = {
         ApiType    = "Azure",
         ResourceId = azurerm_ai_services.AIServices.id

@@ -229,7 +229,7 @@ variable "private_endpoints" {
   }))
 }
 
-variable "ai_service_private_endpoints" {
+variable "ai_search_private_endpoints" {
   description = "List of private endpoints (internal + external)"
   type = list(object({
     private_dns_zone_ids            = list(string)
@@ -308,5 +308,40 @@ variable "model_deployments" {
 
 variable "container_name" {
   description = "container name for datasource"
+  type        = string
+}
+
+variable "datasource_name" {
+  description = "datasource name"
+  type        = string
+}
+
+variable "datasource_type" {
+  description = "datasource type"
+  type        = string
+}
+
+variable "indexer_name" {
+  description = "indexer name"
+  type        = string
+}
+
+variable "indexes_name" {
+  description = "indexes name"
+  type        = string
+}
+
+variable "deploymentId" {
+  description = "deployment id of the model"
+  type        = string
+}
+
+variable "modelName" {
+  description = "model name"
+  type        = string
+}
+
+variable "skillsets_name" {
+  description = "skillsets name"
   type        = string
 }

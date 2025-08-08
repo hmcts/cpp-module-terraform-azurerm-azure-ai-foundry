@@ -53,6 +53,7 @@ resource "azurerm_private_endpoint" "ws_pe" {
     name                 = "private-dns-zone-group-${each.key}"
     private_dns_zone_ids = each.value.private_dns_zone_ids
   }
+  tags                         = var.tags
 }
 
 #azure ai hub project

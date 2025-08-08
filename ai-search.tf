@@ -28,7 +28,7 @@ resource "azurerm_search_service" "main" {
 
 
 resource "azurerm_private_endpoint" "ai_search_pe" {
-  for_each = { for idx, pe in var.ai_service_private_endpoints : idx => pe }
+  for_each = { for idx, pe in var.ai_search_private_endpoints : idx => pe }
 
   name                = "${var.ai_search_service_name}-pe-${each.key}"
   location            = var.location
@@ -46,6 +46,15 @@ resource "azurerm_private_endpoint" "ai_search_pe" {
     name                 = "private-dns-zone-group-${each.key}"
     private_dns_zone_ids = each.value.private_dns_zone_ids
   }
+  tags                         = var.tags
+}
+
+resource "azurerm_search_shared_private_link_service" "openai" {
+  name               = "shared-openai"
+  search_service_id  = azurerm_search_service.main.id
+  subresource_name   = "openai_account"
+  target_resource_id = azurerm_ai_services.AIServices.id
+  request_message    = "please approve"
 }
 
 resource "azurerm_role_assignment" "search_storage_reader" {

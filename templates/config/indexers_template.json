@@ -1,0 +1,23 @@
+{
+  "name" : "${indexer_name}",
+  "dataSourceName" : "${datasource_name}",
+  "targetIndexName" : "${indexes_name}",
+  "skillsetName" : "${skillsets_name}",
+  "parameters" : {
+    "batchSize" : null,
+    "maxFailedItems" : null,
+    "maxFailedItemsPerBatch" : null,
+    "configuration" : {
+      "dataToExtract" : "contentAndMetadata",
+      "parsingMode" : "default",
+      "executionEnvironment": "private"
+    }
+  },
+  "fieldMappings" : [
+    {
+      "sourceFieldName" : "metadata_storage_name",
+      "targetFieldName" : "title",
+      "mappingFunction" : null
+    }
+  ]
+}

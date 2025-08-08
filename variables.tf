@@ -131,7 +131,6 @@ variable "project_description" {
 }
 variable "project_friendly_name" {
   type    = string
-  default = "AI Hub Project"
 }
 variable "project_name" {}
 

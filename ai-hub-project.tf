@@ -71,7 +71,7 @@ resource "azurerm_ai_foundry_project" "this" {
   }
 
   description        = var.project_description
-  friendly_name      = var.project_friendly_name
+  friendly_name      = var.project_name
   ai_services_hub_id = azurerm_ai_foundry.ai_hub.id
 
   tags = var.tags

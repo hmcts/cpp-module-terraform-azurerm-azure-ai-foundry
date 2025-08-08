@@ -75,4 +75,8 @@ resource "azurerm_ai_foundry_project" "this" {
   ai_services_hub_id = azurerm_ai_foundry.ai_hub.id
 
   tags = var.tags
+  depends_on = [
+        azurerm_ai_foundry.ai_hub
+      ]
+
 }

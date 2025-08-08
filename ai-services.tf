@@ -3,7 +3,7 @@ resource "azurerm_ai_services" "AIServices" {
   location                           = var.location
   resource_group_name                = var.resource_group_name
   sku_name                           = var.ai_services_sku
-  custom_subdomain_name              = "${var.ai_services_name}-${var.environment}"
+  custom_subdomain_name              = var.ai_services_name
   local_authentication_enabled       = var.ai_services_local_authentication_enabled
   outbound_network_access_restricted = var.outbound_network_access_restricted
   public_network_access              = var.ai_services_public_network_access

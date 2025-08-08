@@ -63,6 +63,12 @@ resource "azurerm_role_assignment" "search_storage_reader" {
   principal_id         = azurerm_search_service.main.identity[0].principal_id
 }
 
+resource "azurerm_role_assignment" "search_cognitive_openai_user" {
+  scope                = azurerm_ai_services.AIServices.id
+  role_definition_name = "Cognitive Services OpenAI User"
+  principal_id         = azurerm_search_service.main.identity[0].principal_id
+}
+
 #skillsets
 #index and indexers
 #datasource

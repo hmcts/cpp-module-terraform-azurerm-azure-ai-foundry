@@ -48,43 +48,6 @@
           "targetName" : "text_vector"
         }
       ]
-    },
-    {
-      "@odata.type": "#Microsoft.Skills.Util.DocumentExtractionSkill",
-      "name" : "#3",
-      "context" : "/document",
-      "parsingMode" : "default",
-      "dataToExtract" : "contentAndMetadata",
-      "inputs" : [
-        {
-          "name" : "file_data",
-          "source" : "/document/file_data",
-          "inputs" : []
-        }
-      ],
-      "outputs" : [
-        {
-          "name" : "content",
-          "targetName" : "extracted_content"
-        },
-        {
-          "name" : "metadata_storage_name",
-          "targetName" : "file_name"
-        },
-        {
-          "name" : "metadata_storage_last_modified",
-          "targetName" : "last_modified"
-        },
-        {
-          "name" : "idpc_id",
-          "targetName" : "document_idpc_id"
-        },
-        {
-          "name" : "metadata_author",
-          "targetName" : "document_author"
-        }
-      ],
-      "configuration" : {}
     }
   ],
 

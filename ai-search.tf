@@ -81,4 +81,10 @@ resource "azurerm_role_assignment" "search_index_data_reader_2" {
   principal_id         = azurerm_ai_foundry.ai_hub.identity[0].principal_id
 }
 
+resource "azurerm_role_assignment" "search_index_data_reader_2" {
+  scope                = azurerm_search_service.main.id
+  role_definition_name = "Search Service Contributor"
+  principal_id         = azurerm_ai_foundry.ai_hub.identity[0].principal_id
+}
+
 

@@ -69,6 +69,10 @@ resource "azurerm_role_assignment" "search_cognitive_openai_user" {
   principal_id         = azurerm_search_service.main.identity[0].principal_id
 }
 
-#skillsets
-#index and indexers
-#datasource
+resource "azurerm_role_assignment" "search_index_data_reader" {
+  scope                = azurerm_search_service.main.id
+  role_definition_name = "Search Index Data Reader"
+  principal_id         = azurerm_search_service.main.identity[0].principal_id
+}
+
+

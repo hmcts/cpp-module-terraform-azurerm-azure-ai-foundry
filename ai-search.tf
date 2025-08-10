@@ -23,6 +23,12 @@ resource "azurerm_search_service" "main" {
   local_authentication_enabled = var.local_authentication_enabled
   authentication_failure_mode  = var.local_authentication_enabled ? var.authentication_failure_mode : null
   tags                         = var.tags
+  depends_on = [
+      restapi_object.storage_account_datasource,
+      restapi_object.ai_search_indexers,
+      restapi_object.ai_search_indexes,
+      restapi_object.ai_search_skillsets
+    ]
 }
 
 

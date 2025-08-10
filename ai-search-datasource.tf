@@ -20,12 +20,7 @@ resource "restapi_object" "storage_account_datasource" {
   path         = "/datasources"
   query_string = "api-version=2023-10-01-Preview"
 
-  data = templatefile("${path.module}/templates/config/datasource_template.json", {
-    datasource_name   = var.datasource_name
-    datasource_type   = var.datasource_type
-    storage_account_id = var.storage_account_id
-    container_name     = var.container_name
-  })
+  data = var.datasource_json
 
   id_attribute = "name"
 

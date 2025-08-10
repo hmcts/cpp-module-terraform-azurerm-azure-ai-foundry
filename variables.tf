@@ -303,42 +303,22 @@ variable "model_deployments" {
   }))
 }
 
-variable "container_name" {
-  description = "container name for datasource"
+variable "datasource_json" {
   type        = string
+  description = "Rendered JSON content for the datasource"
 }
 
-variable "datasource_name" {
-  description = "datasource name"
+variable "indexers_json" {
   type        = string
+  description = "Rendered JSON content for the indexers"
 }
 
-variable "datasource_type" {
-  description = "datasource type"
+variable "indexes_json" {
   type        = string
+  description = "Rendered JSON content for the indexes"
 }
 
-variable "indexer_name" {
-  description = "indexer name"
+variable "skillsets_json" {
   type        = string
-}
-
-variable "indexes_name" {
-  description = "indexes name"
-  type        = string
-}
-
-variable "deploymentId" {
-  description = "deployment id of the model"
-  type        = string
-}
-
-variable "modelName" {
-  description = "model name"
-  type        = string
-}
-
-variable "skillsets_name" {
-  description = "skillsets name"
-  type        = string
+  description = "Rendered JSON content for the skillsets"
 }

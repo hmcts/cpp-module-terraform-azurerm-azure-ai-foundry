@@ -322,3 +322,8 @@ variable "skillsets_json" {
   type        = string
   description = "Rendered JSON content for the skillsets"
 }
+
+variable "lookup_search_service" {
+  type    = bool
+  default = true
+}

@@ -27,7 +27,7 @@ resource "restapi_object" "storage_account_datasource" {
   id_attribute = "name"
 
   depends_on = [
-    azurerm_search_service.main
+    azurerm_search_service.main, azurerm_private_endpoint.ai_search_pe
   ]
 }
 

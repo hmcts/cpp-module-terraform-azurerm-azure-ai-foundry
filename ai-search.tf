@@ -47,12 +47,6 @@ resource "azurerm_private_endpoint" "ai_search_pe" {
     private_dns_zone_ids = each.value.private_dns_zone_ids
   }
   tags                         = var.tags
-  depends_on = [
-    restapi_object.storage_account_datasource,
-    restapi_object.ai_search_indexers,
-    restapi_object.ai_search_indexes,
-    restapi_object.ai_search_skillsets
-  ]
 }
 
 resource "azurerm_search_shared_private_link_service" "openai" {

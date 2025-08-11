@@ -53,7 +53,7 @@ resource "azurerm_private_endpoint" "ws_pe" {
     name                 = "private-dns-zone-group-${each.key}"
     private_dns_zone_ids = each.value.private_dns_zone_ids
   }
-  tags                         = var.tags
+  tags = var.tags
 }
 
 #azure ai hub project
@@ -76,7 +76,7 @@ resource "azurerm_ai_foundry_project" "this" {
 
   tags = var.tags
   depends_on = [
-        azurerm_ai_foundry.ai_hub
-      ]
+    azurerm_ai_foundry.ai_hub
+  ]
 
 }

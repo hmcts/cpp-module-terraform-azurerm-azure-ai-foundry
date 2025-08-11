@@ -50,7 +50,7 @@ resource "azurerm_private_endpoint" "ai_service_pe" {
     name                 = "private-dns-zone-group-${each.key}"
     private_dns_zone_ids = each.value.private_dns_zone_ids
   }
-  tags                         = var.tags
+  tags = var.tags
 }
 
 resource "azapi_resource" "AIServicesConnection" {
@@ -72,8 +72,8 @@ resource "azapi_resource" "AIServicesConnection" {
   }
   response_export_values = ["*"]
   depends_on = [
-      azurerm_ai_services.AIServices
-    ]
+    azurerm_ai_services.AIServices
+  ]
 }
 
 resource "azurerm_role_assignment" "identity_access_to_ai_services" {

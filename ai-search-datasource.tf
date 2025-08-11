@@ -30,4 +30,3 @@ resource "restapi_object" "storage_account_datasource" {
     azurerm_search_service.main, azurerm_private_endpoint.ai_search_pe
   ]
 }
-

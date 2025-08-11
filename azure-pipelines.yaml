@@ -1,4 +1,4 @@
-name: CPP AKS Module
+name: CPP Azure AI module
 trigger: none
 pr:
   - main

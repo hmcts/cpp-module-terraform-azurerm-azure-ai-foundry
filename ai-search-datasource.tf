@@ -17,7 +17,7 @@ provider "restapi" {
   }
 }
 
-
+#for every run it gets triggered, just run only when there is a change in json -- needs to be fixed
 resource "restapi_object" "storage_account_datasource" {
   path         = "/datasources"
   query_string = "api-version=2023-10-01-Preview"

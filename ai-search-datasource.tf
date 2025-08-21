@@ -1,21 +1,21 @@
 #see how to add rbac authentication instead of api key -- search service contributor role
-data "azurerm_search_service" "search" {
-  count               = var.lookup_search_service ? 1 : 0
-  name                = var.ai_search_service_name
-  resource_group_name = var.resource_group_name
-  depends_on          = [azurerm_search_service.main]
-}
-#delete the restapis with aisearch deletion
-provider "restapi" {
-  uri                  = "https://${azurerm_search_service.main.name}.search.windows.net"
-  write_returns_object = true
-  debug                = true
-
-  headers = {
-    "api-key"      = azurerm_search_service.main.primary_key,
-    "Content-Type" = "application/json"
-  }
-}
+# data "azurerm_search_service" "search" {
+#   count               = var.lookup_search_service ? 1 : 0
+#   name                = var.ai_search_service_name
+#   resource_group_name = var.resource_group_name
+#   depends_on          = [azurerm_search_service.main]
+# }
+# #delete the restapis with aisearch deletion
+# provider "restapi" {
+#   uri                  = "https://${azurerm_search_service.main.name}.search.windows.net"
+#   write_returns_object = true
+#   debug                = true
+#
+#   headers = {
+#     "api-key"      = azurerm_search_service.main.primary_key,
+#     "Content-Type" = "application/json"
+#   }
+# }
 
 #for every run it gets triggered, just run only when there is a change in json -- needs to be fixed
 # resource "restapi_object" "storage_account_datasource" {

@@ -303,25 +303,14 @@ variable "model_deployments" {
   }))
 }
 
-variable "datasource_json" {
-  type        = string
-  description = "Rendered JSON content for the datasource"
-}
 
-variable "indexers_json" {
-  type        = string
-  description = "Rendered JSON content for the indexers"
-}
 
 variable "indexes_json" {
   type        = string
   description = "Rendered JSON content for the indexes"
 }
 
-variable "skillsets_json" {
-  type        = string
-  description = "Rendered JSON content for the skillsets"
-}
+
 
 variable "lookup_search_service" {
   type    = bool

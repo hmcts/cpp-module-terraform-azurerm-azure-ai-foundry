@@ -1,6 +1,3 @@
-#add doc intelligence code
-
-#add all the api keys into keyvault
 
 resource "azurerm_cognitive_account" "formRecognizerAccount" {
   name                               = var.document_intelligence_name

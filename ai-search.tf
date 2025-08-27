@@ -25,6 +25,12 @@ resource "azurerm_search_service" "main" {
   tags                         = var.tags
 }
 
+resource "azurerm_key_vault_secret" "aiSearchKey" {
+  name         = "AZURE-AI-SEARCH-SERVICE-KEY"
+  value        = azurerm_search_service.main.primary_key
+  key_vault_id = var.key_vault_id
+}
+
 
 
 resource "azurerm_private_endpoint" "ai_search_pe" {

@@ -316,3 +316,28 @@ variable "lookup_search_service" {
   type    = bool
   default = true
 }
+
+variable "document_intelligence_name" {
+  description = "Name of the document intelligence"
+  type        = string
+}
+
+variable "document_intelligence_sku" {
+  type        = string
+  default     = null
+  description = "SKU for document intelligence"
+}
+
+variable "document_intelligence_public_network_access_enabled" {
+  type        = bool
+  description = "Enable or disable public network access"
+}
+
+variable "document_intelligence_private_endpoints" {
+  description = "List of private endpoints (internal + external)"
+  type = list(object({
+    private_dns_zone_ids            = list(string)
+    subnet_id                       = string
+    private_dns_resource_group_name = string
+  }))
+}

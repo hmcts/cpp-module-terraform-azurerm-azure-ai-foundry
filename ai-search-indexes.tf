@@ -1,9 +1,9 @@
-data "azurerm_search_service" "search" {
-  count               = var.lookup_search_service ? 1 : 0
-  name                = var.ai_search_service_name
-  resource_group_name = var.resource_group_name
-  depends_on          = [azurerm_search_service.main]
-}
+# data "azurerm_search_service" "search" {
+#   count               = var.lookup_search_service ? 1 : 0
+#   name                = var.ai_search_service_name
+#   resource_group_name = var.resource_group_name
+#   depends_on          = [azurerm_search_service.main]
+# }
 #delete the restapis with aisearch deletion
 provider "restapi" {
   uri                  = "https://${azurerm_search_service.main.name}.search.windows.net"

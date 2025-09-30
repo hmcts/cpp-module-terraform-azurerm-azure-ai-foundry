@@ -63,32 +63,32 @@ resource "azurerm_private_endpoint" "ai_search_pe" {
 #   request_message    = "please approve"
 # }
 
-resource "azurerm_role_assignment" "search_storage_reader" {
-  scope                = var.storage_account_id
-  role_definition_name = "Storage Blob Data Reader"
-  principal_id         = azurerm_search_service.main.identity[0].principal_id
-}
+# resource "azurerm_role_assignment" "search_storage_reader" {
+#   scope                = var.storage_account_id
+#   role_definition_name = "Storage Blob Data Reader"
+#   principal_id         = azurerm_search_service.main.identity[0].principal_id
+# }
 
-resource "azurerm_role_assignment" "search_cognitive_openai_user" {
-  scope                = azurerm_ai_services.AIServices.id
-  role_definition_name = "Cognitive Services OpenAI User"
-  principal_id         = azurerm_search_service.main.identity[0].principal_id
-}
+# resource "azurerm_role_assignment" "search_cognitive_openai_user" {
+#   scope                = azurerm_ai_services.AIServices.id
+#   role_definition_name = "Cognitive Services OpenAI User"
+#   principal_id         = azurerm_search_service.main.identity[0].principal_id
+# }
 
-resource "azurerm_role_assignment" "search_index_data_reader" {
-  scope                = azurerm_search_service.main.id
-  role_definition_name = "Search Index Data Reader"
-  principal_id         = azurerm_search_service.main.identity[0].principal_id
-}
+# resource "azurerm_role_assignment" "search_index_data_reader" {
+#   scope                = azurerm_search_service.main.id
+#   role_definition_name = "Search Index Data Reader"
+#   principal_id         = azurerm_search_service.main.identity[0].principal_id
+# }
 
-resource "azurerm_role_assignment" "search_index_data_reader_2" {
-  scope                = azurerm_search_service.main.id
-  role_definition_name = "Search Index Data Reader"
-  principal_id         = azurerm_ai_foundry.ai_hub.identity[0].principal_id
-}
-
-resource "azurerm_role_assignment" "search_index_data_reader_3" {
-  scope                = azurerm_search_service.main.id
-  role_definition_name = "Search Service Contributor"
-  principal_id         = azurerm_ai_foundry.ai_hub.identity[0].principal_id
-}
+# resource "azurerm_role_assignment" "search_index_data_reader_2" {
+#   scope                = azurerm_search_service.main.id
+#   role_definition_name = "Search Index Data Reader"
+#   principal_id         = azurerm_ai_foundry.ai_hub.identity[0].principal_id
+# }
+#
+# resource "azurerm_role_assignment" "search_index_data_reader_3" {
+#   scope                = azurerm_search_service.main.id
+#   role_definition_name = "Search Service Contributor"
+#   principal_id         = azurerm_ai_foundry.ai_hub.identity[0].principal_id
+# }

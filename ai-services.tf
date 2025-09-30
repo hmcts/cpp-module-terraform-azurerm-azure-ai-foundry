@@ -58,8 +58,8 @@ resource "azurerm_private_endpoint" "ai_service_pe" {
   }
   tags = var.tags
 }
-
-resource "azapi_resource" "AIServicesConnection" {
+#both key and azuread
+resource "azapi_resource" "AIServicesConnectionAPIKey" {
   type      = "Microsoft.MachineLearningServices/workspaces/connections@2024-04-01-preview"
   name      = "${var.ai_services_name}-${var.environment}-connection"
   parent_id = azurerm_ai_foundry.ai_hub.id
@@ -73,6 +73,29 @@ resource "azapi_resource" "AIServicesConnection" {
       credentials = {
         key = azurerm_ai_services.AIServices.primary_access_key # <<<<<< required when using APIKey auth
       },
+      metadata = {
+        ApiType    = "Azure",
+        ResourceId = azurerm_ai_services.AIServices.id
+      }
+    }
+  }
+  response_export_values = ["*"]
+  depends_on = [
+    azurerm_ai_services.AIServices
+  ]
+}
+
+resource "azapi_resource" "AIServicesConnectionEntraID" {
+  type      = "Microsoft.MachineLearningServices/workspaces/connections@2024-04-01-preview"
+  name      = "${var.ai_services_name}-${var.environment}-connection"
+  parent_id = azurerm_ai_foundry.ai_hub.id
+
+  body = {
+    properties = {
+      category      = "AIServices",
+      target        = azurerm_ai_services.AIServices.endpoint,
+      authType      = "AAD",
+      isSharedToAll = true,
       metadata = {
         ApiType    = "Azure",
         ResourceId = azurerm_ai_services.AIServices.id

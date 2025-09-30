@@ -305,10 +305,10 @@ variable "model_deployments" {
 
 
 
-variable "indexes_json" {
-  type        = string
-  description = "Rendered JSON content for the indexes"
-}
+# variable "indexes_json" {
+#   type        = string
+#   description = "Rendered JSON content for the indexes"
+# }
 
 
 

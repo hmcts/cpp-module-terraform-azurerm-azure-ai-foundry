@@ -61,7 +61,7 @@ resource "azurerm_private_endpoint" "ai_service_pe" {
 #both key and azuread
 resource "azapi_resource" "AIServicesConnectionAPIKey" {
   type      = "Microsoft.MachineLearningServices/workspaces/connections@2024-04-01-preview"
-  name      = "${var.ai_services_name}-${var.environment}-connection"
+  name      = "${var.ai_services_name}-${var.environment}-connection-apikey"
   parent_id = azurerm_ai_foundry.ai_hub.id
 
   body = {
@@ -87,7 +87,7 @@ resource "azapi_resource" "AIServicesConnectionAPIKey" {
 
 resource "azapi_resource" "AIServicesConnectionEntraID" {
   type      = "Microsoft.MachineLearningServices/workspaces/connections@2024-04-01-preview"
-  name      = "${var.ai_services_name}-${var.environment}-connection"
+  name      = "${var.ai_services_name}-${var.environment}-connection-entraid"
   parent_id = azurerm_ai_foundry.ai_hub.id
 
   body = {

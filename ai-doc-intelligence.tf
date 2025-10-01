@@ -8,18 +8,6 @@ resource "azurerm_cognitive_account" "formRecognizerAccount" {
   custom_subdomain_name              = var.document_intelligence_name
   public_network_access_enabled      = var.document_intelligence_public_network_access_enabled
   outbound_network_access_restricted = var.outbound_network_access_restricted
-  network_acls {
-    bypass         = var.network_acls.bypass
-    default_action = var.network_acls.default_action
-    ip_rules       = var.network_acls.ip_rules
-
-    dynamic "virtual_network_rules" {
-      for_each = var.network_acls.virtual_network_subnet_ids == null ? [] : var.network_acls.virtual_network_subnet_ids
-      content {
-        subnet_id = virtual_network_rules.value
-      }
-    }
-  }
 
   dynamic "identity" {
     for_each = var.identity == {} ? [] : [var.identity]

@@ -217,7 +217,7 @@ variable "authentication_failure_mode" {
   description = "Specifies the authentication failure behavior (e.g., Http401WithBearerChallenge)"
 }
 
-variable "private_endpoints" {
+variable "ai_hub_private_endpoints" {
   description = "List of private endpoints (internal + external)"
   type = list(object({
     private_dns_zone_ids            = list(string)

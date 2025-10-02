@@ -36,7 +36,7 @@ resource "azurerm_ai_foundry" "ai_hub" {
 
 
 resource "azurerm_private_endpoint" "ws_pe" {
-  for_each            = { for idx, pe in var.private_endpoints : idx => pe }
+  for_each            = { for idx, pe in var.ai_hub_private_endpoints : idx => pe }
   name                = "${var.ai_hub}-pe-${each.key}"
   location            = var.location
   resource_group_name = var.resource_group_name

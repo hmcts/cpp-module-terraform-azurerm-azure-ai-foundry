@@ -75,11 +75,6 @@ resource "azurerm_private_endpoint" "ai_search_pe" {
 #   principal_id         = azurerm_search_service.main.identity[0].principal_id
 # }
 
-# resource "azurerm_role_assignment" "search_index_data_reader" {
-#   scope                = azurerm_search_service.main.id
-#   role_definition_name = "Search Index Data Reader"
-#   principal_id         = azurerm_search_service.main.identity[0].principal_id
-# }
 
 # resource "azurerm_role_assignment" "search_index_data_reader_2" {
 #   scope                = azurerm_search_service.main.id
@@ -87,8 +82,15 @@ resource "azurerm_private_endpoint" "ai_search_pe" {
 #   principal_id         = azurerm_ai_foundry.ai_hub.identity[0].principal_id
 # }
 #
-# resource "azurerm_role_assignment" "search_index_data_reader_3" {
-#   scope                = azurerm_search_service.main.id
-#   role_definition_name = "Search Service Contributor"
-#   principal_id         = azurerm_ai_foundry.ai_hub.identity[0].principal_id
-# }
+
+#need to provide access from function app -- update principal id
+resource "azurerm_role_assignment" "search_index_data_reader" {
+  scope                = azurerm_search_service.main.id
+  role_definition_name = "Search Index Data Contributor"
+  principal_id         = var.fa_principal_id
+}
+resource "azurerm_role_assignment" "search_index_data_reader_3" {
+  scope                = azurerm_search_service.main.id
+  role_definition_name = "Search Service Contributor"
+  principal_id         = var.fa_principal_id
+}

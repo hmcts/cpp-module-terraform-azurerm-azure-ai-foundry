@@ -341,3 +341,8 @@ variable "document_intelligence_private_endpoints" {
     private_dns_resource_group_name = string
   }))
 }
+
+variable "fa_principal_id" {
+  description = "Function app user assigned identity for accessing ai search"
+  type        = string
+}

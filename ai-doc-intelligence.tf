@@ -47,3 +47,4 @@ resource "azurerm_private_endpoint" "ai_document_intelligence_pe" {
   }
   tags = var.tags
 }
+#check if this needs access to storage account

@@ -23,7 +23,7 @@ provider "restapi" {
 resource "restapi_object" "ai_search_indexes" {
   path         = "/indexes"
   query_string = "api-version=2025-05-01-preview"
-  data         = data.http.ai_search_index_json.body
+  data         = data.http.ai_search_index_json.response_body
   id_attribute = "name" # The ID field on the response
   depends_on = [
     azurerm_search_service.main, azurerm_private_endpoint.ai_search_pe

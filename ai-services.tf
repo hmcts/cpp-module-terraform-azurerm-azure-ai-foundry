@@ -37,6 +37,12 @@ resource "azurerm_key_vault_secret" "aiServiceKey" {
   key_vault_id = var.key_vault_id
 }
 
+resource "azurerm_key_vault_secret" "aiServiceEndpoint" {
+  name         = "AZURE-AI-SERVICE-EP"
+  value        = azurerm_ai_services.AIServices.endpoint
+  key_vault_id = var.key_vault_id
+}
+
 resource "azurerm_private_endpoint" "ai_service_pe" {
   for_each = { for idx, pe in var.ai_services_private_endpoints : idx => pe }
 

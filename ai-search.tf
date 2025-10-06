@@ -31,7 +31,11 @@ resource "azurerm_key_vault_secret" "aiSearchKey" {
   key_vault_id = var.key_vault_id
 }
 
-
+resource "azurerm_key_vault_secret" "aiSearchEndpoint" {
+  name         = "AZURE-AI-SEARCH-SERVICE-EP"
+  value        = "https://${var.ai_search_service_name}.search.windows.net"
+  key_vault_id = var.key_vault_id
+}
 
 resource "azurerm_private_endpoint" "ai_search_pe" {
   for_each = { for idx, pe in var.ai_search_private_endpoints : idx => pe }

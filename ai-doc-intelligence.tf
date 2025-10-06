@@ -26,6 +26,12 @@ resource "azurerm_key_vault_secret" "docIntelligenceKey" {
   key_vault_id = var.key_vault_id
 }
 
+resource "azurerm_key_vault_secret" "docIntelligenceEndpoint" {
+  name         = "AZURE-FORM-RECOGNIZER-EP"
+  value        = azurerm_cognitive_account.formRecognizerAccount.endpoint
+  key_vault_id = var.key_vault_id
+}
+
 resource "azurerm_private_endpoint" "ai_document_intelligence_pe" {
   for_each = { for idx, pe in var.document_intelligence_private_endpoints : idx => pe }
 

@@ -5,7 +5,7 @@ resource "azurerm_ai_foundry" "ai_hub" {
   resource_group_name     = var.resource_group_name
   application_insights_id = var.application_insights_id
   key_vault_id            = var.key_vault_id
-  storage_account_id      = var.storage_account_id
+  storage_account_id      = var.ai_hub_storage_account_id
   public_network_access   = var.public_network_access
 
   dynamic "identity" {

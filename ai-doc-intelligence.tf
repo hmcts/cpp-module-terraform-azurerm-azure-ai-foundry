@@ -48,3 +48,9 @@ resource "azurerm_private_endpoint" "ai_document_intelligence_pe" {
   tags = var.tags
 }
 #check if this needs access to storage account
+resource "azurerm_role_assignment" "identity_access_to_sa" {
+  principal_id = azurerm_cognitive_account.formRecognizerAccount.identity[0].principal_id
+  scope        = var.ra_storage_account_id
+
+  role_definition_name = "Storage Blob Data Reader"
+}

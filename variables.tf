@@ -61,7 +61,11 @@ variable "public_network_access" {
   type        = string
 }
 
-variable "storage_account_id" {
+variable "ai_hub_storage_account_id" {
+  type = string
+}
+
+variable "ra_storage_account_id" {
   type = string
 }
 

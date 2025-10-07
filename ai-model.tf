@@ -1,7 +1,7 @@
 resource "azurerm_cognitive_deployment" "models" {
   for_each             = var.model_deployments
   name                 = each.key
-  cognitive_account_id = azurerm_cognitive_account.AIServices.id
+  cognitive_account_id = azurerm_ai_services.AIServices.id
 
   model {
     format  = each.value.format

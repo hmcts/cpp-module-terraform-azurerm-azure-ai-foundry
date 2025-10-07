@@ -65,31 +65,31 @@ resource "azurerm_private_endpoint" "ai_service_pe" {
   tags = var.tags
 }
 #both key and azuread
-resource "azapi_resource" "AIServicesConnectionAPIKey" {
-  type      = "Microsoft.MachineLearningServices/workspaces/connections@2024-04-01-preview"
-  name      = "${var.ai_services_name}-conn-apikey"
-  parent_id = azurerm_ai_foundry.ai_hub.id
-
-  body = {
-    properties = {
-      category      = "AIServices",
-      target        = azurerm_cognitive_account.AIServices.endpoint,
-      authType      = "ApiKey",
-      isSharedToAll = true,
-      credentials = {
-        key = azurerm_cognitive_account.AIServices.primary_access_key # <<<<<< required when using APIKey auth
-      },
-      metadata = {
-        ApiType    = "Azure",
-        ResourceId = azurerm_cognitive_account.AIServices.id
-      }
-    }
-  }
-  response_export_values = ["*"]
-  depends_on = [
-    azurerm_cognitive_account.AIServices
-  ]
-}
+# resource "azapi_resource" "AIServicesConnectionAPIKey" {
+#   type      = "Microsoft.MachineLearningServices/workspaces/connections@2024-04-01-preview"
+#   name      = "${var.ai_services_name}-conn-apikey"
+#   parent_id = azurerm_ai_foundry.ai_hub.id
+#
+#   body = {
+#     properties = {
+#       category      = "AIServices",
+#       target        = azurerm_cognitive_account.AIServices.endpoint,
+#       authType      = "ApiKey",
+#       isSharedToAll = true,
+#       credentials = {
+#         key = azurerm_cognitive_account.AIServices.primary_access_key # <<<<<< required when using APIKey auth
+#       },
+#       metadata = {
+#         ApiType    = "Azure",
+#         ResourceId = azurerm_cognitive_account.AIServices.id
+#       }
+#     }
+#   }
+#   response_export_values = ["*"]
+#   depends_on = [
+#     azurerm_cognitive_account.AIServices
+#   ]
+# }
 
 resource "azapi_resource" "AIServicesConnectionEntraID" {
   type      = "Microsoft.MachineLearningServices/workspaces/connections@2024-04-01-preview"

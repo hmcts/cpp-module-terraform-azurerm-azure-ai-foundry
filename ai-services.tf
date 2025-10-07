@@ -72,7 +72,7 @@ resource "azapi_resource" "AIServicesConnectionAPIKey" {
 
   body = {
     properties = {
-      category      = "AIServices",
+      category      = "OpenAI",
       target        = azurerm_cognitive_account.AIServices.endpoint,
       authType      = "ApiKey",
       isSharedToAll = true,
@@ -98,7 +98,7 @@ resource "azapi_resource" "AIServicesConnectionEntraID" {
 
   body = {
     properties = {
-      category      = "AIServices",
+      category      = "OpenAI",
       target        = azurerm_cognitive_account.AIServices.endpoint,
       authType      = "AAD",
       isSharedToAll = true,

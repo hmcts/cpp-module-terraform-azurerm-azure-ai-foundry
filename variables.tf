@@ -209,6 +209,12 @@ variable "semantic_search_sku" {
   description = "SKU for semantic search (only applicable if SKU is not 'free')"
 }
 
+variable "local_authentication_enabled" {
+  type        = bool
+  default     = false
+  description = "Whether local (API key) authentication is enabled"
+}
+
 variable "authentication_failure_mode" {
   type        = string
   default     = "Http401WithBearerChallenge"

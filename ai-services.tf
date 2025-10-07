@@ -32,13 +32,13 @@ resource "azurerm_ai_services" "AIServices" {
 }
 
 resource "azurerm_key_vault_secret" "aiServiceKey" {
-  name         = "AZURE-AI-SERVICE-${var.environment}-KEY"
+  name         = "AZURE-AI-SERVICE-${upper(var.environment)}-KEY"
   value        = azurerm_ai_services.AIServices.primary_access_key
   key_vault_id = var.key_vault_id
 }
 
 resource "azurerm_key_vault_secret" "aiServiceEndpoint" {
-  name         = "AZURE-AI-SERVICE-${var.environment}-EP"
+  name         = "AZURE-AI-SERVICE-${upper(var.environment)}-EP"
   value        = azurerm_ai_services.AIServices.endpoint
   key_vault_id = var.key_vault_id
 }

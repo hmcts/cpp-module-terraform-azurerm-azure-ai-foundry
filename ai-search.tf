@@ -26,13 +26,13 @@ resource "azurerm_search_service" "main" {
 }
 
 resource "azurerm_key_vault_secret" "aiSearchKey" {
-  name         = "AZURE-AI-SEARCH-SERVICE-${var.environment}-KEY"
+  name         = "AZURE-AI-SEARCH-SERVICE-${upper(var.environment)}-KEY"
   value        = azurerm_search_service.main.primary_key
   key_vault_id = var.key_vault_id
 }
 
 resource "azurerm_key_vault_secret" "aiSearchEndpoint" {
-  name         = "AZURE-AI-SEARCH-SERVICE-${var.environment}-EP"
+  name         = "AZURE-AI-SEARCH-SERVICE-${upper(var.environment)}-EP"
   value        = "https://${var.ai_search_service_name}.search.windows.net"
   key_vault_id = var.key_vault_id
 }

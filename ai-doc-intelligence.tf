@@ -21,13 +21,13 @@ resource "azurerm_cognitive_account" "formRecognizerAccount" {
 }
 
 resource "azurerm_key_vault_secret" "docIntelligenceKey" {
-  name         = "AZURE-FORM-RECOGNIZER-KEY"
+  name         = "AZURE-FORM-RECOGNIZER-${var.environment}-KEY"
   value        = azurerm_cognitive_account.formRecognizerAccount.primary_access_key
   key_vault_id = var.key_vault_id
 }
 
 resource "azurerm_key_vault_secret" "docIntelligenceEndpoint" {
-  name         = "AZURE-FORM-RECOGNIZER-EP"
+  name         = "AZURE-FORM-RECOGNIZER-${var.environment}-EP"
   value        = azurerm_cognitive_account.formRecognizerAccount.endpoint
   key_vault_id = var.key_vault_id
 }

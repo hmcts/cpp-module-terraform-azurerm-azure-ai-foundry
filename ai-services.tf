@@ -43,6 +43,11 @@ resource "azurerm_key_vault_secret" "aiServiceEndpoint" {
   key_vault_id = var.key_vault_id
 }
 
+resource "time_sleep" "wait_for_ai_service" {
+  depends_on = [azurerm_search_service.main]
+  create_duration = "60s"
+}
+
 resource "azurerm_private_endpoint" "ai_service_pe" {
   for_each = { for idx, pe in var.ai_services_private_endpoints : idx => pe }
 
@@ -63,6 +68,7 @@ resource "azurerm_private_endpoint" "ai_service_pe" {
     private_dns_zone_ids = each.value.private_dns_zone_ids
   }
   tags = var.tags
+  depends_on = [time_sleep.wait_for_ai_service]
 }
 #both key and azuread
 resource "azapi_resource" "AIServicesConnectionAPIKey" {

@@ -37,6 +37,11 @@ resource "azurerm_key_vault_secret" "aiSearchEndpoint" {
   key_vault_id = var.key_vault_id
 }
 
+resource "time_sleep" "wait_for_search_service" {
+  depends_on = [azurerm_search_service.main]
+  create_duration = "60s"
+}
+
 resource "azurerm_private_endpoint" "ai_search_pe" {
   for_each = { for idx, pe in var.ai_search_private_endpoints : idx => pe }
 
@@ -57,6 +62,7 @@ resource "azurerm_private_endpoint" "ai_search_pe" {
     private_dns_zone_ids = each.value.private_dns_zone_ids
   }
   tags = var.tags
+  depends_on = [time_sleep.wait_for_search_service]
 }
 
 # resource "azurerm_search_shared_private_link_service" "openai" {

@@ -38,7 +38,7 @@ resource "azurerm_key_vault_secret" "aiSearchEndpoint" {
 }
 
 resource "time_sleep" "wait_for_search_service" {
-  depends_on = [azurerm_search_service.main]
+  depends_on      = [azurerm_search_service.main]
   create_duration = "60s"
 }
 
@@ -61,7 +61,7 @@ resource "azurerm_private_endpoint" "ai_search_pe" {
     name                 = "private-dns-zone-group-${each.key}"
     private_dns_zone_ids = each.value.private_dns_zone_ids
   }
-  tags = var.tags
+  tags       = var.tags
   depends_on = [time_sleep.wait_for_search_service]
 }
 

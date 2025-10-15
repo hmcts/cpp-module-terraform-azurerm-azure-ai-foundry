@@ -1,3 +1,16 @@
+Terraform module to create ai foundry resources
+1) Open ai service
+2) AI HUB
+3) AI PROJECT
+4) Document Intelligence
+5) AI search
+6) Storage account
+7) Text embedding, gpt-4o and gpt-4omini models
+8) Connectivity of ai service to llm models currently supporting both api key and entra id
+9) Required role assignments
+10) Private endpoints for open ai, document intelligence, ai hub, ai search
+11) Creation of ai search index via rest api
+
 # terraform-module-template
 
 <!-- TODO fill in resource name in link to product documentation -->

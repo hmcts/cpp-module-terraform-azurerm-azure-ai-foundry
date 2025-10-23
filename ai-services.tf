@@ -50,7 +50,7 @@ resource "azurerm_key_vault_secret" "aiServiceEndpoint" {
 }
 
 resource "time_sleep" "wait_for_ai_service" {
-  depends_on      = [azurerm_search_service.main]
+  depends_on      = [azurerm_ai_services.AIServices]
   create_duration = "60s"
 }
 

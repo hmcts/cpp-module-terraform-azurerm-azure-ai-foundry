@@ -1,9 +1,15 @@
+resource "random_string" "suffix_ai_service" {
+  length  = 4
+  upper   = false
+  special = false
+}
+
 resource "azurerm_ai_services" "AIServices" {
-  name                               = var.ai_services_name
+  name                               = "${var.ai_services_name}-${random_string.suffix_ai_service.result}"
   location                           = var.location
   resource_group_name                = var.resource_group_name
   sku_name                           = var.ai_services_sku
-  custom_subdomain_name              = var.ai_services_name
+  custom_subdomain_name              = "${var.ai_services_name}-${random_string.suffix_ai_service.result}"
   local_authentication_enabled       = var.ai_services_local_authentication_enabled
   outbound_network_access_restricted = var.outbound_network_access_restricted
   public_network_access              = var.ai_services_public_network_access
@@ -39,7 +45,7 @@ resource "azurerm_key_vault_secret" "aiServiceKey" {
 
 resource "azurerm_key_vault_secret" "aiServiceEndpoint" {
   name         = "AZURE-AI-SERVICE-${upper(var.environment)}-EP"
-  value        = "https://${var.ai_services_name}.openai.azure.com"
+  value        = "https://${var.ai_services_name}-${random_string.suffix_ai_service.result}.openai.azure.com"
   key_vault_id = var.key_vault_id
 }
 
@@ -51,13 +57,13 @@ resource "time_sleep" "wait_for_ai_service" {
 resource "azurerm_private_endpoint" "ai_service_pe" {
   for_each = { for idx, pe in var.ai_services_private_endpoints : idx => pe }
 
-  name                = "${var.ai_services_name}-pe-${each.key}"
+  name                = "${var.ai_services_name}-${random_string.suffix_ai_service.result}-pe-${each.key}"
   location            = var.location
   resource_group_name = var.resource_group_name
   subnet_id           = each.value.subnet_id
 
   private_service_connection {
-    name                           = "${var.ai_services_name}-ai-service-${each.key}"
+    name                           = "${var.ai_services_name}-${random_string.suffix_ai_service.result}-ai-service-${each.key}"
     private_connection_resource_id = azurerm_ai_services.AIServices.id
     subresource_names              = ["account"]
     is_manual_connection           = false
@@ -73,7 +79,7 @@ resource "azurerm_private_endpoint" "ai_service_pe" {
 #both key and azuread
 resource "azapi_resource" "AIServicesConnectionAPIKey" {
   type      = "Microsoft.MachineLearningServices/workspaces/connections@2024-04-01-preview"
-  name      = "${var.ai_services_name}-conn-apikey"
+  name      = "${var.ai_services_name}-${random_string.suffix_ai_service.result}-conn-apikey"
   parent_id = azurerm_ai_foundry.ai_hub.id
 
   body = {
@@ -99,7 +105,7 @@ resource "azapi_resource" "AIServicesConnectionAPIKey" {
 
 resource "azapi_resource" "AIServicesConnectionEntraID" {
   type      = "Microsoft.MachineLearningServices/workspaces/connections@2024-04-01-preview"
-  name      = "${var.ai_services_name}-conn-entraid"
+  name      = "${var.ai_services_name}-${random_string.suffix_ai_service.result}-conn-entraid"
   parent_id = azurerm_ai_foundry.ai_hub.id
 
   body = {

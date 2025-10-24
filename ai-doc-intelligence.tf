@@ -1,11 +1,17 @@
 
+resource "random_string" "suffix_ai_doc_intelligence" {
+  length  = 4
+  upper   = false
+  special = false
+}
+
 resource "azurerm_cognitive_account" "formRecognizerAccount" {
-  name                               = var.document_intelligence_name
+  name                               = "${var.document_intelligence_name}-${random_string.suffix_ai_doc_intelligence.result}"
   location                           = var.location
   resource_group_name                = var.resource_group_name
   kind                               = "FormRecognizer"
   sku_name                           = var.document_intelligence_sku
-  custom_subdomain_name              = var.document_intelligence_name
+  custom_subdomain_name              = "${var.document_intelligence_name}-${random_string.suffix_ai_doc_intelligence.result}"
   public_network_access_enabled      = var.document_intelligence_public_network_access_enabled
   outbound_network_access_restricted = var.outbound_network_access_restricted
 
@@ -35,13 +41,13 @@ resource "azurerm_key_vault_secret" "docIntelligenceEndpoint" {
 resource "azurerm_private_endpoint" "ai_document_intelligence_pe" {
   for_each = { for idx, pe in var.document_intelligence_private_endpoints : idx => pe }
 
-  name                = "${var.document_intelligence_name}-pe-${each.key}"
+  name                = "${var.document_intelligence_name}-${random_string.suffix_ai_doc_intelligence.result}-pe-${each.key}"
   location            = var.location
   resource_group_name = var.resource_group_name
   subnet_id           = each.value.subnet_id
 
   private_service_connection {
-    name                           = "${var.document_intelligence_name}-doc-intelligence-${each.key}"
+    name                           = "${var.document_intelligence_name}-${random_string.suffix_ai_doc_intelligence.result}-doc-intelligence-${each.key}"
     private_connection_resource_id = azurerm_cognitive_account.formRecognizerAccount.id
     subresource_names              = ["account"]
     is_manual_connection           = false

@@ -44,6 +44,7 @@ module "todo_resource_name" {
 | <a name="provider_azapi"></a> [azapi](#provider\_azapi) | 2.4.0 |
 | <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | 4.34.0 |
 | <a name="provider_http"></a> [http](#provider\_http) | 3.5.0 |
+| <a name="provider_random"></a> [random](#provider\_random) | n/a |
 | <a name="provider_restapi"></a> [restapi](#provider\_restapi) | 2.0.1 |
 | <a name="provider_time"></a> [time](#provider\_time) | 0.13.1 |
 
@@ -73,6 +74,8 @@ module "todo_resource_name" {
 | [azurerm_role_assignment.search_index_data_reader](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/role_assignment) | resource |
 | [azurerm_role_assignment.search_index_data_reader_3](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/role_assignment) | resource |
 | [azurerm_search_service.main](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/search_service) | resource |
+| [random_string.suffix_ai_doc_intelligence](https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/string) | resource |
+| [random_string.suffix_ai_service](https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/string) | resource |
 | [restapi_object.ai_search_indexes](https://registry.terraform.io/providers/Mastercard/restapi/2.0.1/docs/resources/object) | resource |
 | [time_sleep.wait_for_ai_service](https://registry.terraform.io/providers/hashicorp/time/latest/docs/resources/sleep) | resource |
 | [time_sleep.wait_for_search_service](https://registry.terraform.io/providers/hashicorp/time/latest/docs/resources/sleep) | resource |

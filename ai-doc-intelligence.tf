@@ -66,3 +66,10 @@ resource "azurerm_role_assignment" "identity_access_to_sa" {
 
   role_definition_name = "Storage Blob Data Reader"
 }
+
+resource "azurerm_role_assignment" "identity_access_to_document_intelligence" {
+  principal_id = var.fa_principal_id
+  scope        = azurerm_cognitive_account.formRecognizerAccount.id
+
+  role_definition_name = "Cognitive Services User"
+}

@@ -78,6 +78,7 @@ resource "azurerm_private_endpoint" "ai_service_pe" {
 }
 #both key and azuread
 resource "azapi_resource" "AIServicesConnectionAPIKey" {
+  count     = var.create_ai_connection_apikey ? 1 : 0
   type      = "Microsoft.MachineLearningServices/workspaces/connections@2024-04-01-preview"
   name      = "${var.ai_services_name}-${random_string.suffix_ai_service.result}-conn-apikey"
   parent_id = azurerm_ai_foundry.ai_hub.id
@@ -104,6 +105,7 @@ resource "azapi_resource" "AIServicesConnectionAPIKey" {
 }
 
 resource "azapi_resource" "AIServicesConnectionEntraID" {
+  count     = var.create_ai_connection_entraid ? 1 : 0
   type      = "Microsoft.MachineLearningServices/workspaces/connections@2024-04-01-preview"
   name      = "${var.ai_services_name}-${random_string.suffix_ai_service.result}-conn-entraid"
   parent_id = azurerm_ai_foundry.ai_hub.id

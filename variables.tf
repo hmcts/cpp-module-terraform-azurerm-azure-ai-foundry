@@ -350,3 +350,21 @@ variable "fa_principal_id" {
   description = "Function app user assigned identity for accessing ai search"
   type        = string
 }
+
+variable "rai_policy_name" {
+  type        = string
+  description = "Policy name for disabling content filtering"
+  default     = ""
+}
+
+variable "create_ai_connection_apikey" {
+  description = "Set to true to create API Key connection"
+  type        = bool
+  default     = false
+}
+
+variable "create_ai_connection_entraid" {
+  description = "Set to true to create Entra ID (AAD) connection"
+  type        = bool
+  default     = false
+}

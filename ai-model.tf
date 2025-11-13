@@ -1,6 +1,6 @@
 resource "azapi_resource" "rai_policy_disable_all" {
   type      = "Microsoft.CognitiveServices/accounts/raiPolicies@2024-10-01"
-  name      = "${var.rai_policy_name}"
+  name      = var.rai_policy_name
   parent_id = azurerm_ai_services.AIServices.id
 
   body = {

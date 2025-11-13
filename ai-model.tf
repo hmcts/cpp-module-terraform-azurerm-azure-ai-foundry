@@ -6,7 +6,7 @@ resource "azapi_resource" "rai_policy_disable_all" {
   body = {
     properties = {
       basePolicyName = "Microsoft.Default"
-      mode           = "Asynchronous_filter"
+      mode           = "Default"
 
       contentFilters = [
         # --- Disable all harm categories completely ---

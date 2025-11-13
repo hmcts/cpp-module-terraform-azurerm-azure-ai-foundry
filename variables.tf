@@ -350,3 +350,9 @@ variable "fa_principal_id" {
   description = "Function app user assigned identity for accessing ai search"
   type        = string
 }
+
+variable "rai_policy_name" {
+  type        = string
+  description = "Policy name for disabling content filtering"
+  default     = ""
+}

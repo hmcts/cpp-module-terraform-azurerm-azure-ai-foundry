@@ -356,3 +356,15 @@ variable "rai_policy_name" {
   description = "Policy name for disabling content filtering"
   default     = ""
 }
+
+variable "create_ai_connection_apikey" {
+  description = "Set to true to create API Key connection"
+  type        = bool
+  default     = false
+}
+
+variable "create_ai_connection_entraid" {
+  description = "Set to true to create Entra ID (AAD) connection"
+  type        = bool
+  default     = false
+}

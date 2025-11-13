@@ -91,6 +91,12 @@ resource "azapi_resource" "rai_policy_disable_all" {
           blocking = false
           enabled  = false
           source   = "Prompt"
+        },
+        {
+          name     = "Profanity"
+          blocking = false
+          enabled  = false
+          source   = "Completion"
         }
       ]
     }

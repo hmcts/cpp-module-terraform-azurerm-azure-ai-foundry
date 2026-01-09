@@ -115,5 +115,5 @@ resource "azurerm_cognitive_deployment" "models" {
   version_upgrade_option     = each.value.version_upgrade_option
   dynamic_throttling_enabled = each.value.dynamic_throttling_enabled
 
-  depends_on = [azapi_resource.rai_policy_disable_all]
+  #depends_on = [azapi_resource.rai_policy_disable_all]
 }

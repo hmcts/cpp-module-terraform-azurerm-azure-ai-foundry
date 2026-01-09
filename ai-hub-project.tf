@@ -35,26 +35,26 @@ resource "azurerm_ai_foundry" "ai_hub" {
 
 
 
-resource "azurerm_private_endpoint" "ws_pe" {
-  for_each            = { for idx, pe in var.ai_hub_private_endpoints : idx => pe }
-  name                = "${var.ai_hub}-pe-${each.key}"
-  location            = var.location
-  resource_group_name = var.resource_group_name
-  subnet_id           = each.value.subnet_id
-
-  private_service_connection {
-    name                           = "${var.ai_hub}-ws-psc-${each.key}"
-    private_connection_resource_id = azurerm_ai_foundry.ai_hub.id
-    subresource_names              = ["amlworkspace"]
-    is_manual_connection           = false
-  }
-
-  private_dns_zone_group {
-    name                 = "private-dns-zone-group-${each.key}"
-    private_dns_zone_ids = each.value.private_dns_zone_ids
-  }
-  tags = var.tags
-}
+# resource "azurerm_private_endpoint" "ws_pe" {
+#   for_each            = { for idx, pe in var.ai_hub_private_endpoints : idx => pe }
+#   name                = "${var.ai_hub}-pe-${each.key}"
+#   location            = var.location
+#   resource_group_name = var.resource_group_name
+#   subnet_id           = each.value.subnet_id
+#
+#   private_service_connection {
+#     name                           = "${var.ai_hub}-ws-psc-${each.key}"
+#     private_connection_resource_id = azurerm_ai_foundry.ai_hub.id
+#     subresource_names              = ["amlworkspace"]
+#     is_manual_connection           = false
+#   }
+#
+#   private_dns_zone_group {
+#     name                 = "private-dns-zone-group-${each.key}"
+#     private_dns_zone_ids = each.value.private_dns_zone_ids
+#   }
+#   tags = var.tags
+# }
 
 #azure ai hub project
 

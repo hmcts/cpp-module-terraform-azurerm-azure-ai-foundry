@@ -147,10 +147,10 @@ variable "private_dns_resource_group_name" {
   type        = string
   default     = "RG-DEV-SVC-01"
 }
-variable "subnet_ai" {
-  description = "Subnet ID for the private endpoint"
-  type        = string
-}
+# variable "subnet_ai" {
+#   description = "Subnet ID for the private endpoint"
+#   type        = string
+# }
 
 variable "identity" {
   description = "Identity block Specifies the identity to assign to function app"
@@ -221,14 +221,14 @@ variable "authentication_failure_mode" {
   description = "Specifies the authentication failure behavior (e.g., Http401WithBearerChallenge)"
 }
 
-variable "ai_hub_private_endpoints" {
-  description = "List of private endpoints (internal + external)"
-  type = list(object({
-    private_dns_zone_ids            = list(string)
-    subnet_id                       = string
-    private_dns_resource_group_name = string
-  }))
-}
+# variable "ai_hub_private_endpoints" {
+#   description = "List of private endpoints (internal + external)"
+#   type = list(object({
+#     private_dns_zone_ids            = list(string)
+#     subnet_id                       = string
+#     private_dns_resource_group_name = string
+#   }))
+# }
 
 # variable "ai_search_private_endpoints" {
 #   description = "List of private endpoints (internal + external)"
@@ -285,14 +285,14 @@ variable "ai_services_public_network_access" {
   type        = string
 }
 
-variable "ai_services_private_endpoints" {
-  description = "List of private endpoints (internal + external)"
-  type = list(object({
-    private_dns_zone_ids            = list(string)
-    subnet_id                       = string
-    private_dns_resource_group_name = string
-  }))
-}
+# variable "ai_services_private_endpoints" {
+#   description = "List of private endpoints (internal + external)"
+#   type = list(object({
+#     private_dns_zone_ids            = list(string)
+#     subnet_id                       = string
+#     private_dns_resource_group_name = string
+#   }))
+# }
 
 variable "model_deployments" {
   type = map(object({

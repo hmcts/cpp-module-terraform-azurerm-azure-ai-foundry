@@ -54,28 +54,28 @@ resource "time_sleep" "wait_for_ai_service" {
   create_duration = "60s"
 }
 
-resource "azurerm_private_endpoint" "ai_service_pe" {
-  for_each = { for idx, pe in var.ai_services_private_endpoints : idx => pe }
-
-  name                = "${var.ai_services_name}-${random_string.suffix_ai_service.result}-pe-${each.key}"
-  location            = var.location
-  resource_group_name = var.resource_group_name
-  subnet_id           = each.value.subnet_id
-
-  private_service_connection {
-    name                           = "${var.ai_services_name}-${random_string.suffix_ai_service.result}-ai-service-${each.key}"
-    private_connection_resource_id = azurerm_ai_services.AIServices.id
-    subresource_names              = ["account"]
-    is_manual_connection           = false
-  }
-
-  private_dns_zone_group {
-    name                 = "private-dns-zone-group-${each.key}"
-    private_dns_zone_ids = each.value.private_dns_zone_ids
-  }
-  tags       = var.tags
-  depends_on = [time_sleep.wait_for_ai_service]
-}
+# resource "azurerm_private_endpoint" "ai_service_pe" {
+#   for_each = { for idx, pe in var.ai_services_private_endpoints : idx => pe }
+#
+#   name                = "${var.ai_services_name}-${random_string.suffix_ai_service.result}-pe-${each.key}"
+#   location            = var.location
+#   resource_group_name = var.resource_group_name
+#   subnet_id           = each.value.subnet_id
+#
+#   private_service_connection {
+#     name                           = "${var.ai_services_name}-${random_string.suffix_ai_service.result}-ai-service-${each.key}"
+#     private_connection_resource_id = azurerm_ai_services.AIServices.id
+#     subresource_names              = ["account"]
+#     is_manual_connection           = false
+#   }
+#
+#   private_dns_zone_group {
+#     name                 = "private-dns-zone-group-${each.key}"
+#     private_dns_zone_ids = each.value.private_dns_zone_ids
+#   }
+#   tags       = var.tags
+#   depends_on = [time_sleep.wait_for_ai_service]
+# }
 #both key and azuread
 resource "azapi_resource" "AIServicesConnectionAPIKey" {
   count     = var.create_ai_connection_apikey ? 1 : 0

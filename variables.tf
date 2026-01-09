@@ -158,31 +158,31 @@ variable "identity" {
   default     = {}
 }
 
-variable "ai_search_service_name" {
-  type        = string
-  description = "Name of the Azure Cognitive Search service"
-}
+# variable "ai_search_service_name" {
+#   type        = string
+#   description = "Name of the Azure Cognitive Search service"
+# }
+#
+# variable "ai_search_sku" {
+#   type        = string
+#   description = "SKU for Azure Cognitive Search. Possible values: 'free', 'basic', 'standard', etc."
+#   validation {
+#     condition     = contains(["free", "basic", "standard", "standard2", "standard3", "storage_optimized_l1", "storage_optimized_l2"], var.ai_search_sku)
+#     error_message = "Invalid SKU for Azure Cognitive Search."
+#   }
+# }
 
-variable "ai_search_sku" {
-  type        = string
-  description = "SKU for Azure Cognitive Search. Possible values: 'free', 'basic', 'standard', etc."
-  validation {
-    condition     = contains(["free", "basic", "standard", "standard2", "standard3", "storage_optimized_l1", "storage_optimized_l2"], var.ai_search_sku)
-    error_message = "Invalid SKU for Azure Cognitive Search."
-  }
-}
-
-variable "replica_count" {
-  type        = number
-  default     = 1
-  description = "Number of replicas (ignored for 'free' SKU)"
-}
-
-variable "partition_count" {
-  type        = number
-  default     = 1
-  description = "Number of partitions (ignored for 'free' SKU)"
-}
+# variable "replica_count" {
+#   type        = number
+#   default     = 1
+#   description = "Number of replicas (ignored for 'free' SKU)"
+# }
+#
+# variable "partition_count" {
+#   type        = number
+#   default     = 1
+#   description = "Number of partitions (ignored for 'free' SKU)"
+# }
 
 variable "hosting_mode" {
   type        = string
@@ -190,10 +190,10 @@ variable "hosting_mode" {
   description = "Hosting mode for the search service"
 }
 
-variable "public_network_access_enabled" {
-  type        = bool
-  description = "Enable or disable public network access"
-}
+# variable "public_network_access_enabled" {
+#   type        = bool
+#   description = "Enable or disable public network access"
+# }
 
 variable "allowed_ips" {
   type        = list(string)
@@ -230,14 +230,14 @@ variable "ai_hub_private_endpoints" {
   }))
 }
 
-variable "ai_search_private_endpoints" {
-  description = "List of private endpoints (internal + external)"
-  type = list(object({
-    private_dns_zone_ids            = list(string)
-    subnet_id                       = string
-    private_dns_resource_group_name = string
-  }))
-}
+# variable "ai_search_private_endpoints" {
+#   description = "List of private endpoints (internal + external)"
+#   type = list(object({
+#     private_dns_zone_ids            = list(string)
+#     subnet_id                       = string
+#     private_dns_resource_group_name = string
+#   }))
+# }
 
 variable "ai_services_name" {
   description = "Name of the AI Services resource."
@@ -316,46 +316,46 @@ variable "model_deployments" {
 
 
 
-variable "lookup_search_service" {
-  type    = bool
-  default = true
-}
-
-variable "document_intelligence_name" {
-  description = "Name of the document intelligence"
-  type        = string
-}
-
-variable "document_intelligence_sku" {
-  type        = string
-  default     = null
-  description = "SKU for document intelligence"
-}
-
-variable "document_intelligence_public_network_access_enabled" {
-  type        = bool
-  description = "Enable or disable public network access"
-}
-
-variable "document_intelligence_private_endpoints" {
-  description = "List of private endpoints (internal + external)"
-  type = list(object({
-    private_dns_zone_ids            = list(string)
-    subnet_id                       = string
-    private_dns_resource_group_name = string
-  }))
-}
-
-variable "fa_principal_id" {
-  description = "Function app user assigned identity for accessing ai search"
-  type        = string
-}
-
-variable "rai_policy_name" {
-  type        = string
-  description = "Policy name for disabling content filtering"
-  default     = ""
-}
+# variable "lookup_search_service" {
+#   type    = bool
+#   default = true
+# }
+#
+# variable "document_intelligence_name" {
+#   description = "Name of the document intelligence"
+#   type        = string
+# }
+#
+# variable "document_intelligence_sku" {
+#   type        = string
+#   default     = null
+#   description = "SKU for document intelligence"
+# }
+#
+# variable "document_intelligence_public_network_access_enabled" {
+#   type        = bool
+#   description = "Enable or disable public network access"
+# }
+#
+# variable "document_intelligence_private_endpoints" {
+#   description = "List of private endpoints (internal + external)"
+#   type = list(object({
+#     private_dns_zone_ids            = list(string)
+#     subnet_id                       = string
+#     private_dns_resource_group_name = string
+#   }))
+# }
+#
+# variable "fa_principal_id" {
+#   description = "Function app user assigned identity for accessing ai search"
+#   type        = string
+# }
+#
+# variable "rai_policy_name" {
+#   type        = string
+#   description = "Policy name for disabling content filtering"
+#   default     = ""
+# }
 
 variable "create_ai_connection_apikey" {
   description = "Set to true to create API Key connection"

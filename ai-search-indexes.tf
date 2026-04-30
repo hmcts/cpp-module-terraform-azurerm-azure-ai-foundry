@@ -6,7 +6,7 @@
 # }
 #delete the restapis with aisearch deletion
 data "http" "ai_search_index_json" {
-  url = "https://raw.githubusercontent.com/hmcts/cp-ai-rag-service/refs/tags/v17.0.17/ai-document-shared-artefacts/src/main/resources/vector-db-index-schema.json"
+  url = "https://raw.githubusercontent.com/hmcts/cp-ai-rag-service/refs/tags/${var.ai_search_index_tag}/ai-document-shared-artefacts/src/main/resources/vector-db-index-schema.json"
 }
 
 provider "restapi" {

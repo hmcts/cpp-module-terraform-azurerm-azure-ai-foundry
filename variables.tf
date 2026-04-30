@@ -368,3 +368,9 @@ variable "create_ai_connection_entraid" {
   type        = bool
   default     = false
 }
+
+variable "ai_search_index_tag" {
+  type        = string
+  description = "AI search index git tag version"
+  default     = "v17.0.71"
+}

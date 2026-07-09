@@ -128,9 +128,10 @@ resource "azapi_resource" "AIServicesConnectionEntraID" {
   ]
 }
 
-resource "azurerm_role_assignment" "identity_access_to_ai_services" {
-  principal_id = var.fa_principal_id
-  scope        = azurerm_ai_services.AIServices.id
+resource "azurerm_role_assignment" "ai_services" {
+  for_each = toset(var.fa_principal_ids)
 
+  scope                = azurerm_ai_services.AIServices.id
   role_definition_name = "Cognitive Services OpenAI User"
+  principal_id         = each.value
 }

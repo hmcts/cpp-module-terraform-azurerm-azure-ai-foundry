@@ -346,9 +346,8 @@ variable "document_intelligence_private_endpoints" {
   }))
 }
 
-variable "fa_principal_id" {
-  description = "Function app user assigned identity for accessing ai search"
-  type        = string
+variable "fa_principal_ids" {
+  type = list(string)
 }
 
 variable "rai_policy_name" {

@@ -95,12 +95,16 @@ resource "azurerm_private_endpoint" "ai_search_pe" {
 
 #need to provide access from function app -- update principal id
 resource "azurerm_role_assignment" "search_index_data_reader" {
+  for_each = toset(var.fa_principal_ids)
+
   scope                = azurerm_search_service.main.id
   role_definition_name = "Search Index Data Contributor"
-  principal_id         = var.fa_principal_id
+  principal_id         = each.value
 }
 resource "azurerm_role_assignment" "search_index_data_reader_3" {
+  for_each = toset(var.fa_principal_ids)
+
   scope                = azurerm_search_service.main.id
   role_definition_name = "Search Service Contributor"
-  principal_id         = var.fa_principal_id
+  principal_id         = each.value
 }
